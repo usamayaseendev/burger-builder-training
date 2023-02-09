@@ -4,9 +4,13 @@
 
 #burger-container {
   text-align: center;
-  padding-top: 3%;
   min-height: 450px;
-  max-height: 600px;
+  max-height: 700px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 7%;
 }
 
 #bun-top-image {
@@ -20,7 +24,9 @@
 }
 
 #empty-burger {
-  font-size: 19px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: Open Sans, sans-serif;
 }
 
 #burger-builder-container {
@@ -72,10 +78,12 @@
   color: #ccc;
   cursor: not-allowed;
 }
+
 .remove-button {
   background-color: #d39952;
 }
-.remove-button:hover {
+
+.remove-button:not(.disabled):hover {
   background-color: #daa972;
 }
 
@@ -104,8 +112,32 @@
   font-family: Open Sans, sans-serif;
 }
 
-#order-button:hover {
+#order-button:disabled {
+  background-color: #c7c6c6;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+  color: #888;
+}
+
+#order-button:not(.disabled):hover {
   background-color: #a0db41;
   border: 1px solid #966909;
   color: #966909;
+}
+
+.enabled-animation {
+  animation: ButtonAnimation 0.3s linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes ButtonAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

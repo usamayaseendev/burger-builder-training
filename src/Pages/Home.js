@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import TopBun from "../Assets/Images/Top_Bun.png";
 import BottomBun from "../Assets/Images/Bottom_Bun.png";
 import "./HomeStyles.css";
+import { styles } from "../Styles/HomeStyles";
 // Create Home Component with just a text saying welcome to Home
 const Home = (props) => {
   const [price, setPrice] = useState(0);
+  const [animateButton, setAnimate] = useState(false);
+  // const [removedIngredients, setRemovedIngredients] = useState([]);
   // List of Ingredients and their prices
   const Ingredients = {
     Lettuce: 0.5,
@@ -14,70 +17,128 @@ const Home = (props) => {
   };
   // Selected Ingredients
   const [selectedIngredients, setSelectedIngredients] = useState({
-    Lettuce: 0,
-    Bacon: 0,
-    Cheese: 0,
-    Meat: 0,
+    Lettuce: {
+      present: 0,
+      removed: 0,
+    },
+    Bacon: {
+      present: 0,
+      removed: 0,
+    },
+    Cheese: {
+      present: 0,
+      removed: 0,
+    },
+    Meat: {
+      present: 0,
+      removed: 0,
+    },
   });
+
+  const addIngredient = (item) => {
+    setSelectedIngredients({
+      ...selectedIngredients,
+      [item]: {
+        ...selectedIngredients[item],
+        present: selectedIngredients[item].present + 1,
+      },
+    });
+  };
+
+  const removeIngredient = (item) => {
+    setSelectedIngredients({
+      ...selectedIngredients,
+      [item]: {
+        present: selectedIngredients[item].present - 1,
+        removed: selectedIngredients[item].removed + 1,
+      },
+    });
+  };
 
   // Update Price When A New Ingredient is added or removed
   useEffect(() => {
-    const price =
-      3 +
-      Ingredients.Lettuce * selectedIngredients.Lettuce +
-      Ingredients.Bacon * selectedIngredients.Bacon +
-      Ingredients.Cheese * selectedIngredients.Cheese +
-      Ingredients.Meat * selectedIngredients.Meat;
+    let newPrice = 3;
+    Object.keys(selectedIngredients).forEach((ingredient) => {
+      newPrice +=
+        Ingredients[ingredient] * selectedIngredients[ingredient].present +
+        Ingredients[ingredient] * selectedIngredients[ingredient].removed * 2;
+    });
+    // The Price of removedIngredients will be double counted
+    // 1- for the original ingredient
+    // 2- for the removed ingredient
 
-    setPrice(price);
+    setPrice(newPrice);
   }, [selectedIngredients]);
-
-  const ChangeIngredient = (item) => {
-    switch (item) {
-      case "Lettuce":
-        setSelectedIngredients({
-          ...selectedIngredients,
-          Lettuce: selectedIngredients.Lettuce + 1,
-        });
-        break;
-      case "Bacon":
-        setSelectedIngredients({
-          ...selectedIngredients,
-          Bacon: selectedIngredients.Bacon + 1,
-        });
-        break;
-      case "Cheese":
-        setSelectedIngredients({
-          ...selectedIngredients,
-          Cheese: selectedIngredients.Cheese + 1,
-        });
-        break;
-      case "Meat":
-        setSelectedIngredients({
-          ...selectedIngredients,
-          Meat: selectedIngredients.Meat + 1,
-        });
-        break;
-      default:
-        break;
-    }
-  };
 
   // TODO: Create Order Now Logic
   const orderNow = () => {
-    // activate model
+    setAnimate(true);
+    // wait for 2 seconds and set animate to false
+    setTimeout(() => {
+      setAnimate(false);
+    }, 2000);
   };
 
   return (
     <div id="home-container">
-      <div id="burger-container">
+      {
+        //? Center Burger
+      }
+      <div id="burger-container" className="border border-5 border-primary">
+        {
+          //? Divide in 4 divs 1 for each ingredient
+        }
         <img src={TopBun} alt="Top Bun" id="bun-top-image" />
-        <p id="empty-burger">No Ingredients Added</p>
+        {selectedIngredients.Lettuce.present +
+          selectedIngredients.Bacon.present +
+          selectedIngredients.Cheese.present +
+          selectedIngredients.Meat.present ===
+        0 ? (
+          <p id="empty-burger">No Ingredients Added</p>
+        ) : (
+          <>
+            {
+              //? Letuces
+            }
+            {Array(selectedIngredients.Lettuce.present)
+              .fill(true)
+              .map(() => (
+                <div style={styles.lettuce}></div>
+              ))}
+            {
+              //? Beacon
+            }
+            {Array(selectedIngredients.Bacon.present)
+              .fill(true)
+              .map(() => (
+                <div style={styles.bacon}></div>
+              ))}
+            {
+              //? Cheese
+            }
+            {Array(selectedIngredients.Cheese.present)
+              .fill(true)
+              .map(() => (
+                <div style={styles.cheese}></div>
+              ))}
+            {
+              //? Meat
+            }
+            {Array(selectedIngredients.Meat.present)
+              .fill(true)
+              .map(() => (
+                <div style={styles.meat}></div>
+              ))}
+          </>
+        )}
         <img src={BottomBun} alt="Bottom Bun" id="bun-bottom-image" />
       </div>
+      {
+        //? Burger Ingredients
+      }
       <div id="burger-builder-container">
         {/* Price */}
-        <p id="price-text">
+        <p id="price-text" className="mt-2">
           Current price: <strong>${price.toFixed(2)}</strong>
         </p>
         {/* Ingredients */}
@@ -88,15 +149,18 @@ const Home = (props) => {
           <p className="ingredients-text">Lettuce</p>
           <div className="ingredient-actions">
             <button
-              disabled={true}
-              className="ingredient-button remove-button disabled"
-              onClick={() => ChangeIngredient("Lettuce")}
+              disabled={selectedIngredients.Lettuce.present === 0}
+              className={
+                "ingredient-button remove-button " +
+                (selectedIngredients.Lettuce.present === 0 ? "disabled" : "")
+              }
+              onClick={() => removeIngredient("Lettuce")}
             >
               Less
             </button>
             <button
-              className="ingredient-button add-button disabled"
-              onClick={() => ChangeIngredient("Lettuce")}
+              className="ingredient-button add-button"
+              onClick={() => addIngredient("Lettuce")}
             >
               More
             </button>
@@ -106,14 +170,18 @@ const Home = (props) => {
           <p className="ingredients-text">Bacon</p>
           <div className="ingredient-actions">
             <button
-              className="ingredient-button remove-button"
-              onClick={() => ChangeIngredient("Bacon")}
+              disabled={selectedIngredients.Bacon.present === 0}
+              className={
+                "ingredient-button remove-button " +
+                (selectedIngredients.Bacon.present === 0 ? "disabled" : "")
+              }
+              onClick={() => removeIngredient("Bacon")}
             >
               Less
             </button>
             <button
               className="ingredient-button add-button"
-              onClick={() => ChangeIngredient("Bacon")}
+              onClick={() => addIngredient("Bacon")}
             >
               More
             </button>
@@ -123,14 +191,18 @@ const Home = (props) => {
           <p className="ingredients-text">Cheese</p>
           <div className="ingredient-actions">
             <button
-              className="ingredient-button remove-button"
-              onClick={() => ChangeIngredient("Cheese")}
+              disabled={selectedIngredients.Cheese.present === 0}
+              className={
+                "ingredient-button remove-button " +
+                (selectedIngredients.Cheese.present === 0 ? "disabled" : "")
+              }
+              onClick={() => removeIngredient("Cheese")}
             >
               Less
             </button>
             <button
               className="ingredient-button add-button"
-              onClick={() => ChangeIngredient("Cheese")}
+              onClick={() => addIngredient("Cheese")}
             >
               More
             </button>
@@ -140,14 +212,18 @@ const Home = (props) => {
           <p className="ingredients-text">Meat</p>
           <div className="ingredient-actions">
             <button
-              className="ingredient-button remove-button"
-              onClick={() => ChangeIngredient("Meat")}
+              disabled={selectedIngredients.Meat.present === 0}
+              className={
+                "ingredient-button remove-button " +
+                (selectedIngredients.Meat.present === 0 ? "disabled" : "")
+              }
+              onClick={() => removeIngredient("Meat")}
             >
               Less
             </button>
             <button
               className="ingredient-button add-button"
-              onClick={() => ChangeIngredient("Meat")}
+              onClick={() => addIngredient("Meat")}
             >
               More
             </button>
@@ -156,7 +232,27 @@ const Home = (props) => {
         {
           //TODO: Checks for Empty CART
         }
-        <button id="order-button" onClick={orderNow}>
+        <button
+          id="order-button"
+          disabled={
+            selectedIngredients.Bacon.present === 0 &&
+            selectedIngredients.Lettuce.present === 0 &&
+            selectedIngredients.Cheese.present === 0 &&
+            selectedIngredients.Meat.present === 0
+          }
+          // TODO: Make it Animate when Cart is not empty for the first time
+          className={
+            animateButton
+              ? "enabled-animation"
+              : "" + selectedIngredients.Bacon.present === 0 &&
+                selectedIngredients.Lettuce.present === 0 &&
+                selectedIngredients.Cheese.present === 0 &&
+                selectedIngredients.Meat.present === 0
+              ? "disabled"
+              : ""
+          }
+          onClick={orderNow}
+        >
           ORDER NOW
         </button>
       </div>

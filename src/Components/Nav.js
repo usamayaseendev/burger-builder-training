@@ -9,11 +9,18 @@ const Nav = (props) => {
     setActiveItem(item);
   };
   return (
+    // ? Navigation Bar
     <nav class="navbar navbar-expand-sm fixed-top " id="navbar">
       <div className="container-fluid" id="navbar-list-container">
-        <a class="navbar-brand" href="#">
+        {
+          //? NavBar LHS
+        }
+        <div className="bg-light p-2 d-flex justify-content-center rounded">
           <img src={Logo} alt="Burger Builder" width={45} height={28} />
-        </a>
+        </div>
+        {
+          //? NavBar RHS/Links
+        }
         <ul className="navbar-nav" id="navbar-list">
           <li
             className={`navbar-item d-flex justify-content-center px-2 ${
