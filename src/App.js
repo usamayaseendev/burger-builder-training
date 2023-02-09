@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import React, { useState } from "react";
+import Nav from "./Components/Nav";
 function App() {
+  const [user, setUser] = useState(null);
+  const [activeItem, setActiveItem] = useState("Burger Builder");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Nav activeItem={activeItem} setActiveItem={setActiveItem} user={user} />
+      {false && <Login />}
+      <Home user={user} setUser={setUser} />
+    </>
   );
 }
 

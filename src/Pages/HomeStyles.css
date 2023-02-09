@@ -1,0 +1,111 @@
+#home-container {
+  /* border: 2px solid; */
+}
+
+#burger-container {
+  text-align: center;
+  padding-top: 3%;
+  min-height: 450px;
+  max-height: 600px;
+}
+
+#bun-top-image {
+  width: 560px;
+  height: 120px;
+}
+
+#bun-bottom-image {
+  width: 560px;
+  height: 80px;
+}
+
+#empty-burger {
+  font-size: 19px;
+}
+
+#burger-builder-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #cf8f2e;
+}
+
+.ingredients {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+.ingredients-text {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: Open Sans, sans-serif;
+  width: 80px;
+  margin: 0px;
+  margin-right: 10px;
+  padding: 10px;
+}
+
+.ingredient-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.ingredient-button {
+  color: #fff;
+  display: block;
+  padding: 5px;
+  margin: 0 5px;
+  width: 80px;
+  border: 1px solid #aa6817;
+  cursor: pointer;
+  outline: none;
+  font-size: 16px;
+  font-family: Open Sans, sans-serif;
+}
+
+.ingredient-button:disabled {
+  background-color: #ac9980;
+  border: 1px solid #7e7365;
+  color: #ccc;
+  cursor: not-allowed;
+}
+.remove-button {
+  background-color: #d39952;
+}
+.remove-button:hover {
+  background-color: #daa972;
+}
+
+.add-button {
+  background-color: #8f5e1e;
+}
+.add-button:hover {
+  background-color: #99703f;
+}
+
+#order-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+#order-button {
+  background-color: #dad735;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #966909;
+  color: #966909;
+  font-size: 19px;
+  padding: 15px 30px;
+  box-shadow: 2px 2px 2px #966909;
+  margin: 12px 0 12px 0;
+  font-family: Open Sans, sans-serif;
+}
+
+#order-button:hover {
+  background-color: #a0db41;
+  border: 1px solid #966909;
+  color: #966909;
+}
