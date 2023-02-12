@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import Logo from "../Assets/Images/burger-logo.png";
+import { Link } from "react-router-dom";
 
 const Nav = (props) => {
   const { activeItem, setActiveItem, user } = props;
@@ -10,7 +11,7 @@ const Nav = (props) => {
   };
   return (
     // ? Navigation Bar
-    <nav class="navbar navbar-expand-sm fixed-top " id="navbar">
+    <nav className="navbar navbar-expand-sm fixed-top " id="navbar">
       <div className="container-fluid" id="navbar-list-container">
         {
           //? NavBar LHS
@@ -27,13 +28,13 @@ const Nav = (props) => {
               activeItem === "Burger Builder" ? "active" : ""
             }`}
           >
-            <a
+            <Link
               className="navbar-text d-flex text-center"
-              href="/"
+              to="/"
               onClick={() => handleActiveClick("Burger Builder")}
             >
               Burger Builder
-            </a>
+            </Link>
           </li>
           {user == null ? (
             <li
@@ -41,13 +42,13 @@ const Nav = (props) => {
                 activeItem === "Login" ? "active" : ""
               }`}
             >
-              <a
+              <Link
                 className="navbar-text"
-                href="/auth"
+                to={"/auth"}
                 onClick={() => handleActiveClick("Login")}
               >
                 Login
-              </a>
+              </Link>
             </li>
           ) : (
             <>
@@ -56,18 +57,18 @@ const Nav = (props) => {
                   activeItem === "Orders" ? "active" : ""
                 }`}
               >
-                <a
+                <Link
                   className="navbar-text"
-                  href="/auth"
+                  to="/orders"
                   onClick={() => handleActiveClick("Orders")}
                 >
                   Orders
-                </a>
+                </Link>
               </li>
-              <li className="navbar-item">
-                <a className="navbar-text" href="/logout">
+              <li className="navbar-item d-flex justify-content-center px-2">
+                <Link className="navbar-text" to="/logout">
                   Logout
-                </a>
+                </Link>
               </li>
             </>
           )}

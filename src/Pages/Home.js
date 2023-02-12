@@ -43,6 +43,18 @@ const Home = (props) => {
         present: selectedIngredients[item].present + 1,
       },
     });
+
+    // if all present selected ingredients == 0
+    if (
+      Object.keys(selectedIngredients).every((ingredient) => {
+        return selectedIngredients[ingredient].present === 0;
+      })
+    ) {
+      setAnimate(true);
+      setTimeout(() => {
+        setAnimate(false);
+      }, 500);
+    }
   };
 
   const removeIngredient = (item) => {
@@ -72,11 +84,8 @@ const Home = (props) => {
 
   // TODO: Create Order Now Logic
   const orderNow = () => {
-    setAnimate(true);
+    // setAnimate(true);
     // wait for 2 seconds and set animate to false
-    setTimeout(() => {
-      setAnimate(false);
-    }, 2000);
   };
 
   return (
@@ -84,9 +93,12 @@ const Home = (props) => {
       {
         //? Center Burger
       }
-      <div id="burger-container" className="border border-5 border-primary">
+      <div id="burger-container">
         {
           //? Divide in 4 divs 1 for each ingredient
+        }
+        {
+          // TODO: Change Top And Bottom Bun Images
         }
         <img src={TopBun} alt="Top Bun" id="bun-top-image" />
         {selectedIngredients.Lettuce.present +

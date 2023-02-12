@@ -20,7 +20,7 @@ export const styles = {
     background: "linear-gradient(#f4d004,#d6bb22)",
   },
   meat: {
-    height: 32,
+    height: 48,
     width: 560,
     marginBottom: "1%",
     borderRadius: 20,
