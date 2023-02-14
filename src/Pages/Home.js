@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import TopBun from "../Assets/Images/Top_Bun.png";
 import BottomBun from "../Assets/Images/Bottom_Bun.png";
-import "./HomeStyles.css";
+import "../Styles/HomeStyles.css";
 import { styles } from "../Styles/HomeStyles";
+import { Button, Modal } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+
 // Create Home Component with just a text saying welcome to Home
 const Home = (props) => {
+  const { user, setActiveItem } = props;
   const [price, setPrice] = useState(0);
   const [animateButton, setAnimate] = useState(false);
-  // const [removedIngredients, setRemovedIngredients] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  let navigate = useNavigate();
+
   // List of Ingredients and their prices
   const Ingredients = {
     Lettuce: 0.5,
@@ -86,10 +95,72 @@ const Home = (props) => {
   const orderNow = () => {
     // setAnimate(true);
     // wait for 2 seconds and set animate to false
+    setShow(true);
+  };
+
+  const checkout = () => {
+    setActiveItem("None");
+    navigate("/checkout", {
+      state: {
+        selectedIngredients: selectedIngredients,
+        price: price,
+      },
+    });
+  };
+
+  const signUp = () => {
+    setActiveItem("Login");
+    navigate("/auth", {
+      state: {
+        selectedIngredients: selectedIngredients,
+        price: price,
+      },
+    });
   };
 
   return (
-    <div id="home-container">
+    <div className="home-container">
+      <Modal
+        isOpen={show}
+        size="md"
+        centered={true}
+        onHide={handleClose}
+        className="modal"
+      >
+        <div className="modal-body">
+          <div class="">
+            <h3>Your Order Summary:</h3>
+            <ul>
+              <li>
+                <span className="ingreds">lettuce</span>:{" "}
+                {selectedIngredients.Lettuce.present}
+              </li>
+              <li>
+                <span className="ingreds">bacon</span>:{" "}
+                {selectedIngredients.Bacon.present}
+              </li>
+              <li>
+                <span className="ingreds">cheese</span>:{" "}
+                {selectedIngredients.Cheese.present}
+              </li>
+              <li>
+                <span className="ingreds">meat</span>:{" "}
+                {selectedIngredients.Meat.present}
+              </li>
+            </ul>
+            <p>
+              <strong>Total Price: ${price.toFixed(2)}</strong>
+            </p>
+            <p>Continue to Checkout?</p>
+            <button id="cancel" onClick={handleClose}>
+              CANCEL
+            </button>
+            <button id="continue" onClick={checkout}>
+              CONTINUE
+            </button>
+          </div>
+        </div>
+      </Modal>
       {
         //? Center Burger
       }
@@ -157,7 +228,7 @@ const Home = (props) => {
         {
           //TODO: Checks for disabled state of button
         }
-        <div class="ingredients">
+        <div className="ingredients">
           <p className="ingredients-text">Lettuce</p>
           <div className="ingredient-actions">
             <button
@@ -178,7 +249,7 @@ const Home = (props) => {
             </button>
           </div>
         </div>
-        <div class="ingredients">
+        <div className="ingredients">
           <p className="ingredients-text">Bacon</p>
           <div className="ingredient-actions">
             <button
@@ -242,7 +313,10 @@ const Home = (props) => {
           </div>
         </div>
         {
-          //TODO: Checks for Empty CART
+          ////: Checks for Empty CART
+        }
+        {
+          //TODO: Check For Sign Up
         }
         <button
           id="order-button"
@@ -256,16 +330,17 @@ const Home = (props) => {
           className={
             animateButton
               ? "enabled-animation"
-              : "" + selectedIngredients.Bacon.present === 0 &&
+              : "" +
+                (selectedIngredients.Bacon.present === 0 &&
                 selectedIngredients.Lettuce.present === 0 &&
                 selectedIngredients.Cheese.present === 0 &&
                 selectedIngredients.Meat.present === 0
-              ? "disabled"
-              : ""
+                  ? "disabled"
+                  : "")
           }
-          onClick={orderNow}
+          onClick={user === null ? signUp : orderNow}
         >
-          ORDER NOW
+          {user === null ? "SIGN UP FOR ORDER" : "ORDER NOW"}
         </button>
       </div>
     </div>

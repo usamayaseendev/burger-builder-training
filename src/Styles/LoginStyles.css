@@ -39,6 +39,15 @@
   width: 100%;
   box-sizing: border-box;
 }
+.field-error {
+  color: red;
+  margin: 5px 0 !important;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
 
 .buttons {
   background-color: transparent;

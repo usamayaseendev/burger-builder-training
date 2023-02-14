@@ -7,6 +7,8 @@ import Nav from "./Components/Nav";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Logout from "./Pages/Logout";
 import Orders from "./Pages/Orders";
+import Checkout from "./Pages/Checkout";
+import { ContactData } from "./Pages/ContactData";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,11 +40,23 @@ function App() {
           <Route
             exact
             path="/"
-            element={<Home user={user} setUser={setUser} />}
+            element={
+              <Home
+                user={user}
+                setUser={setUser}
+                setActiveItem={setActiveItem}
+              />
+            }
           />
           <Route
             path="/auth"
-            element={<Login user={user} setUser={setUser} />}
+            element={
+              <Login
+                user={user}
+                setUser={setUser}
+                setActiveItem={setActiveItem}
+              />
+            }
           />
           <Route
             path="/logout"
@@ -52,6 +66,18 @@ function App() {
             path="/orders"
             element={<Orders user={user} setUser={setUser} />}
           />
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                user={user}
+                setUser={setUser}
+                setActiveItem={setActiveItem}
+              />
+            }
+          >
+            <Route path="contact-data" element={<ContactData />} />
+          </Route>
         </Routes>
       </Router>
     </>

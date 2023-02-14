@@ -11,7 +11,7 @@ const Nav = (props) => {
   };
   return (
     // ? Navigation Bar
-    <nav className="navbar navbar-expand-sm fixed-top " id="navbar">
+    <nav className="navbar navbar-expand fixed-top " id="navbar">
       <div className="container-fluid" id="navbar-list-container">
         {
           //? NavBar LHS

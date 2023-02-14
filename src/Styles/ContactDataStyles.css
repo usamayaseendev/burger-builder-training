@@ -1,0 +1,78 @@
+@media (min-width: 600px) {
+  .contact-div {
+    width: 500px;
+  }
+}
+
+.contact-div {
+  margin: 20px auto;
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.contact-div h4 {
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.input-container {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: block;
+}
+.input-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input-fields {
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#confirm-order-button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+#confirm-order-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  font-weight: 700;
+  color: #5c9210;
+}
+
+.order-button:first-of-type {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.validation-error {
+  color: red;
+  margin: 5px 0 !important;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}

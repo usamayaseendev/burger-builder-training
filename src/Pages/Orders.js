@@ -1,32 +1,78 @@
-import React, { useState } from "react";
+import {
+  collection,
+  Firestore,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { db } from "../utils/firebase";
 
-import "./OrderStyles.css";
+import "../Styles/OrderStyles.css";
 
 const Orders = (props) => {
   const { user } = props;
+  const [orders, setorders] = useState([]);
 
-  const orders = [
-    {
-      ingredients: {
-        Lettuce: 2,
-        Bacon: 3,
-        Cheese: 1,
-        Meat: 2,
-      },
-      price: 10,
-    },
-  ];
+  const getOrders = async () => {
+    // get the order from firestore
+    // query = query();
+    let email = JSON.parse(localStorage.getItem("user")).email;
+    console.log("user", email);
+
+    const q = query(collection(db, "users"), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    let ordersData = [];
+    if (!querySnapshot.empty) {
+      querySnapshot.forEach((doc) => {
+        console.log("doc data = ", doc.data());
+        ordersData.push(...doc.data().orders);
+      });
+      console.log("ordersData", ordersData);
+      setorders(ordersData);
+    } else {
+      console.log("hello");
+    }
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
+  useEffect(() => {
+    console.log("orders loaded" + orders);
+  }, [orders]);
+
+  // const orders = [
+  //   {
+  //     ingredients: {
+  //       Lettuce: 2,
+  //       Bacon: 3,
+  //       Cheese: 1,
+  //       Meat: 2,
+  //     },
+  //     price: 10,
+  //   },
+  // ];
+  if (orders.length == 0) {
+    return (
+      <main className="main">
+        <h1>You have no orders</h1>
+      </main>
+    );
+  }
 
   return (
     <main className="main">
       {orders.map((data) => {
+        console.log("data in mapping", data);
         return (
           <div key={Math.random()} className="order">
             <p>
-              Ingredients :<span>Bacon ({data.ingredients.Bacon})</span>
-              <span>Cheese ({data.ingredients.Cheese})</span>
-              <span>Lettuce ({data.ingredients.Lettuce})</span>
-              <span>Meat ({data.ingredients.Meat})</span>
+              Ingredients :<span>Bacon ({data.ingredients.Bacon.present})</span>
+              <span>Cheese ({data.ingredients.Cheese.present})</span>
+              <span>Lettuce ({data.ingredients.Lettuce.present})</span>
+              <span>Meat ({data.ingredients.Meat.present})</span>
             </p>
             <p>
               Price <strong>USD {data.price.toFixed(2)}</strong>
