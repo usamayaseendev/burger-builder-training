@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useEffect } from 'react'
 
-const Logout = (props) => {
-  const { user } = props;
-
+const Logout = () => {
   useEffect(() => {
-    localStorage.clear();
-    console.log("local storage cleared");
-    window.location.href = "/ ";
-  }, []);
+    localStorage.clear()
+    window.location.href = '/ '
+  }, [])
 
-  return <></>;
-};
+  return
+}
 
-export default Logout;
+export default Logout

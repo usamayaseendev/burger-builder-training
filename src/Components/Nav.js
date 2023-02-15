@@ -1,37 +1,38 @@
-import React from "react";
-import "./styles.css";
-import Logo from "../Assets/Images/burger-logo.png";
-import { Link } from "react-router-dom";
+import React from 'react'
+import './styles.css'
+import Logo from '../Assets/Images/burger-logo.png'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-const Nav = (props) => {
-  const { activeItem, setActiveItem, user } = props;
+const Nav = props => {
+  const { activeItem, setActiveItem, user } = props
 
-  const handleActiveClick = (item) => {
-    setActiveItem(item);
-  };
+  const handleActiveClick = item => {
+    setActiveItem(item)
+  }
   return (
     // ? Navigation Bar
-    <nav className="navbar navbar-expand fixed-top " id="navbar">
-      <div className="container-fluid" id="navbar-list-container">
+    <nav className='navbar navbar-expand fixed-top ' id='navbar'>
+      <div className='container-fluid' id='navbar-list-container'>
         {
           //? NavBar LHS
         }
-        <div className="bg-light p-2 d-flex justify-content-center rounded">
-          <img src={Logo} alt="Burger Builder" width={45} height={28} />
+        <div className='bg-light p-2 d-flex justify-content-center rounded'>
+          <img src={Logo} alt='Burger Builder' width={45} height={28} />
         </div>
         {
           //? NavBar RHS/Links
         }
-        <ul className="navbar-nav" id="navbar-list">
+        <ul className='navbar-nav' id='navbar-list'>
           <li
             className={`navbar-item d-flex justify-content-center px-2 ${
-              activeItem === "Burger Builder" ? "active" : ""
+              activeItem === 'Burger Builder' ? 'active' : ''
             }`}
           >
             <Link
-              className="navbar-text d-flex text-center"
-              to="/"
-              onClick={() => handleActiveClick("Burger Builder")}
+              className='navbar-text d-flex text-center'
+              to='/'
+              onClick={() => handleActiveClick('Burger Builder')}
             >
               Burger Builder
             </Link>
@@ -39,14 +40,10 @@ const Nav = (props) => {
           {user == null ? (
             <li
               className={`navbar-item d-flex justify-content-center px-2 ${
-                activeItem === "Login" ? "active" : ""
+                activeItem === 'Login' ? 'active' : ''
               }`}
             >
-              <Link
-                className="navbar-text"
-                to={"/auth"}
-                onClick={() => handleActiveClick("Login")}
-              >
+              <Link className='navbar-text' to={'/auth'} onClick={() => handleActiveClick('Login')}>
                 Login
               </Link>
             </li>
@@ -54,19 +51,19 @@ const Nav = (props) => {
             <>
               <li
                 className={`navbar-item d-flex justify-content-center px-2 ${
-                  activeItem === "Orders" ? "active" : ""
+                  activeItem === 'Orders' ? 'active' : ''
                 }`}
               >
                 <Link
-                  className="navbar-text"
-                  to="/orders"
-                  onClick={() => handleActiveClick("Orders")}
+                  className='navbar-text'
+                  to='/orders'
+                  onClick={() => handleActiveClick('Orders')}
                 >
                   Orders
                 </Link>
               </li>
-              <li className="navbar-item d-flex justify-content-center px-2">
-                <Link className="navbar-text" to="/logout">
+              <li className='navbar-item d-flex justify-content-center px-2'>
+                <Link className='navbar-text' to='/logout'>
                   Logout
                 </Link>
               </li>
@@ -75,7 +72,13 @@ const Nav = (props) => {
         </ul>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Nav;
+Nav.propTypes = {
+  activeItem: PropTypes.string,
+  setActiveItem: PropTypes.func,
+  user: PropTypes.object
+}
+
+export default Nav
