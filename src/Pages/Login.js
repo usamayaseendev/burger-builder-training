@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { redirect, useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../utils/firebase";
@@ -8,8 +8,7 @@ import "../Styles/LoginStyles.css";
 import "../Styles/loader.css";
 
 const Login = (props) => {
-  // TODO: Apply Loader
-  const { user, setUser, setActiveItem } = props;
+  const { setUser, setActiveItem } = props;
   const [email, setEmail] = useState({
     value: "",
     errorMessage: "",
@@ -25,13 +24,13 @@ const Login = (props) => {
 
   const [mode, setMode] = useState("SIGN IN");
 
-  useEffect(() => {
-    if (location.state) {
-      console.log(location.state);
-    } else {
-      console.log("No ingredients selected");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (location.state) {
+  //     console.log(location.state);
+  //   } else {
+  //     console.log("No ingredients selected");
+  //   }
+  // }, []);
 
   const changeMode = () => {
     if (mode === "SIGN IN") {
@@ -164,7 +163,7 @@ const Login = (props) => {
                   placeholder="E-mail Address"
                   value={email.value}
                   onChange={(event) => {
-                    if (event.target.value.length == 0)
+                    if (event.target.value.length === 0)
                       setEmail({
                         value: event.target.value,
                         errorMessage: "Please enter a valid email",
@@ -212,7 +211,7 @@ const Login = (props) => {
           </button>
         </form>
         <button onClick={changeMode} className="buttons button-auth">
-          {mode == "SIGN IN" ? "REGISTER" : "SIGN IN"}
+          {mode === "SIGN IN" ? "REGISTER" : "SIGN IN"}
         </button>
       </div>
     </main>

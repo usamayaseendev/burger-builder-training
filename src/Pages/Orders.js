@@ -1,6 +1,5 @@
 import {
   collection,
-  Firestore,
   getDocs,
   query,
   where,
@@ -11,7 +10,6 @@ import { db } from "../utils/firebase";
 import "../Styles/OrderStyles.css";
 
 const Orders = (props) => {
-  const { user } = props;
   const [orders, setorders] = useState([]);
 
   const getOrders = async () => {
@@ -43,17 +41,6 @@ const Orders = (props) => {
     console.log("orders loaded" + orders);
   }, [orders]);
 
-  // const orders = [
-  //   {
-  //     ingredients: {
-  //       Lettuce: 2,
-  //       Bacon: 3,
-  //       Cheese: 1,
-  //       Meat: 2,
-  //     },
-  //     price: 10,
-  //   },
-  // ];
   if (orders.length == 0) {
     return (
       <main className="main">

@@ -3,10 +3,9 @@ import TopBun from "../Assets/Images/Top_Bun.png";
 import BottomBun from "../Assets/Images/Bottom_Bun.png";
 import "../Styles/HomeStyles.css";
 import { styles } from "../Styles/HomeStyles";
-import { Button, Modal } from "reactstrap";
+import { Modal } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
-// Create Home Component with just a text saying welcome to Home
 const Home = (props) => {
   const { user, setActiveItem } = props;
   const [price, setPrice] = useState(0);
@@ -14,7 +13,6 @@ const Home = (props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   let navigate = useNavigate();
 
   // List of Ingredients and their prices
@@ -91,10 +89,7 @@ const Home = (props) => {
     setPrice(newPrice);
   }, [selectedIngredients]);
 
-  // TODO: Create Order Now Logic
   const orderNow = () => {
-    // setAnimate(true);
-    // wait for 2 seconds and set animate to false
     setShow(true);
   };
 
@@ -168,9 +163,6 @@ const Home = (props) => {
         {
           //? Divide in 4 divs 1 for each ingredient
         }
-        {
-          // TODO: Change Top And Bottom Bun Images
-        }
         <img src={TopBun} alt="Top Bun" id="bun-top-image" />
         {selectedIngredients.Lettuce.present +
           selectedIngredients.Bacon.present +
@@ -225,9 +217,6 @@ const Home = (props) => {
           Current price: <strong>${price.toFixed(2)}</strong>
         </p>
         {/* Ingredients */}
-        {
-          //TODO: Checks for disabled state of button
-        }
         <div className="ingredients">
           <p className="ingredients-text">Lettuce</p>
           <div className="ingredient-actions">
@@ -312,12 +301,6 @@ const Home = (props) => {
             </button>
           </div>
         </div>
-        {
-          ////: Checks for Empty CART
-        }
-        {
-          //TODO: Check For Sign Up
-        }
         <button
           id="order-button"
           disabled={
@@ -326,7 +309,6 @@ const Home = (props) => {
             selectedIngredients.Cheese.present === 0 &&
             selectedIngredients.Meat.present === 0
           }
-          // TODO: Make it Animate when Cart is not empty for the first time
           className={
             animateButton
               ? "enabled-animation"

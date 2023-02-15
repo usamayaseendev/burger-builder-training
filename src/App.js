@@ -12,9 +12,6 @@ import { ContactData } from "./Pages/ContactData";
 
 function App() {
   const [user, setUser] = useState(null);
-  // // const [user, setUser] = useState({
-  //   username: "here",
-  // });
   const [activeItem, setActiveItem] = useState(
     window.location.pathname === "/auth" ? "Login" : "Burger Builder"
   );
