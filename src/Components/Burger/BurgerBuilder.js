@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Styles/HomeStyles.css'
+import '../../Styles/HomeStyles.css'
 import PropTypes from 'prop-types'
 
 const BurgerBuilder = props => {

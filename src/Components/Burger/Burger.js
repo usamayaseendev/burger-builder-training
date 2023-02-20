@@ -1,9 +1,9 @@
-import TopBun from '../Assets/Images/Top_Bun.png'
-import BottomBun from '../Assets/Images/Bottom_Bun.png'
+import TopBun from '../../Assets/Images/Top_Bun.png'
+import BottomBun from '../../Assets/Images/Bottom_Bun.png'
 import React from 'react'
-import '../Styles/HomeStyles.css'
+import '../../Styles/HomeStyles'
 import PropTypes from 'prop-types'
-import { styles } from '../Styles/HomeStyles'
+import { styles } from '../../Styles/HomeStyles'
 
 const Burger = props => {
   const { isEmpty, Lettuce, Cheese, Bacon, Meat } = props

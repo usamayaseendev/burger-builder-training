@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import '../Styles/HomeStyles.css'
 import { useNavigate } from 'react-router-dom'
 import OrderConfirmationModal from '../Components/Modal'
-import Burger from './Burger'
-import BurgerBuilder from './BurgerBuilder'
 import PropTypes from 'prop-types'
+import Burger from '../Components/Burger/Burger'
+import BurgerBuilder from '../Components/Burger/BurgerBuilder'
 
 const Home = props => {
   const { user, setActiveItem } = props

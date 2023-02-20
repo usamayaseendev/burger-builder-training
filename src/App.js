@@ -9,6 +9,7 @@ import Logout from './Pages/Logout'
 import Orders from './Pages/Orders'
 import Checkout from './Pages/Checkout'
 import { ContactData } from './Pages/ContactData'
+import NotFound from './Pages/NotFound'
 
 function App() {
   const [user, setUser] = useState({})
@@ -46,6 +47,7 @@ function App() {
         >
           <Route path='contact-data' element={<ContactData />} />
         </Route>
+        <Route path='*' element={<NotFound setActiveItem={setActiveItem} />} />
       </Routes>
     </Router>
   )
